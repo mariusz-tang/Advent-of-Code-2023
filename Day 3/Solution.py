@@ -1,50 +1,69 @@
-def part_one(schematic):
-    total = 0
-    for rowIx in range(len(schematic)):
-        adjacent_rows = []
-        if rowIx != 0:
-            adjacent_rows.append(schematic[rowIx - 1])
-        if rowIx + 1 < len(schematic):
-            adjacent_rows.append(schematic[rowIx + 1])
-        total += get_row_total(schematic[rowIx], adjacent_rows)
-    return total
+class Schematic:
+    def __init__(self, raw_text: str) -> None:
+        self._grid = [[char for char in row] for row in raw_text.splitlines()]
+        self._asterisk_values = {}
+        self._numbers = self._get_numbers()
 
+    def _get_numbers(self):
+        numbers = []
+        for rowIx, row in enumerate(self._grid):
+            sequence = ""
+            for colIx, char in enumerate(row):
+                if char.isdigit():
+                    sequence += char
+                elif sequence != "":
+                    number = Schematic._Number(colIx - len(sequence), rowIx, sequence)
+                    if self._check_number_for_symbol(number):
+                        numbers.append(number)
+                    sequence = ""
+            if sequence != "":
+                number = Schematic._Number(colIx + 1 - len(sequence), rowIx, sequence)
+                if self._check_number_for_symbol(number):
+                    numbers.append(number)
+        return numbers
 
-def get_row_total(row: str, adjacent_rows):
-    total = 0
-    pos = 0
-    length = len(row)
-    while pos < length:
-        if row[pos].isdigit():
-            sequence = row[pos]
-            for nextIx in range(pos + 1, length):
-                if nextIx < length and row[nextIx].isdigit():
-                    sequence += row[nextIx]
-                else:
-                    break
-            has_symbol = (pos > 0 and is_symbol(row[pos - 1])) or (pos + len(sequence) < len(row) and is_symbol(row[pos + len(sequence)]))
-            if not has_symbol:
-                for adj_row in adjacent_rows:
-                    has_symbol = has_symbol or has_symbol_in_row_section(adj_row, pos - 1, pos + len(sequence))
-            if has_symbol:
-                total += int(sequence)
-            pos += len(sequence)
-        pos += 1
-    return total
+    def _check_number_for_symbol(self, number):
+        result = False
+        for x, y in [
+            (x, y)
+            for x in range(number.x - 1, number.x + number.length + 1)
+            for y in [number.y - 1, number.y + 1]
+        ] + [(number.x - 1, number.y), (number.x + number.length, number.y)]:
+            char = self._get_character_at_position(x, y)
+            if not char.isdigit() and char != ".":
+                result = True
+                if char == "*":
+                    self._handle_asterisk(x, y, number.number)
+        return result
 
+    def _get_character_at_position(self, x, y):
+        if x < 0 or y < 0 or y >= len(self._grid) or x >= len(self._grid[y]):
+            return "."
+        return self._grid[y][x]
 
-def has_symbol_in_row_section(row: str, start, end):
-    for char in row[max(0, start) : min(len(row), end + 1)]:
-        if is_symbol(char):
-            return True
-    return False
+    def _handle_asterisk(self, x, y, number):
+        key = f"{x} {y}" 
+        if key not in self._asterisk_values:
+            self._asterisk_values[key] = []
+        self._asterisk_values[key].append(number)
 
+    def get_sum_of_numbers(self):
+        return sum([num.number for num in self._numbers])
+    
+    def get_gear_sum(self):
+        gears = filter(lambda values: len(values) == 2, self._asterisk_values.values())
+        return sum([gear[0] * gear[1] for gear in gears])
 
-def is_symbol(char: str):
-    return not (char.isdigit() or char == ".")
+    class _Number:
+        def __init__(self, x, y, number: str) -> None:
+            self.x = x
+            self.y = y
+            self.number = int(number)
+            self.length = len(number)
 
 
 if __name__ == "__main__":
     with open("Puzzle input.txt", "r") as data:
-        schematic = data.read().splitlines()
-    print(f"Part 1: The total comes out to {part_one(schematic)}!")
+        schematic = Schematic(data.read())
+    print(f"Part 1: The total comes out to {schematic.get_sum_of_numbers()}!")
+    print(f"Part 2: The total comes out to {schematic.get_gear_sum()}!")
