@@ -42,4 +42,4 @@ if __name__ == "__main__":
     with open("Puzzle input.txt", "r") as data:
         cards = data.read().splitlines()
     print(f"Part 1: we have {part_one(cards)} points! :)")
-    print(f"Part 1: we end up with {part_two(cards)} cards! :)")
+    print(f"Part 2: we end up with {part_two(cards)} cards! :)")
