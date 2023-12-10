@@ -6,3 +6,5 @@ Puzzle and test inputs are not included as requested in the about section of the
 > Can I copy/redistribute part of Advent of Code? Please don't. Advent of Code is free to use, not free to copy. If you're posting a code repository somewhere, please don't include parts of Advent of Code like the puzzle text or your inputs. If you're making a website, please don't make it look like Advent of Code or name it something similar.
 
 I highly encourage you to try out the problems for yourself before viewing my or anyone else's solutions.
+
+To get started, run `create_template_files.py` in your chosen directory. This will create 25 folders, one for each day, each with a template Python and input files, as well as a gitignore file to prevent you from inadvertantly including your puzzle inputs in an online repository.
