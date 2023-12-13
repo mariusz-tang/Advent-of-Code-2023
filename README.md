@@ -7,4 +7,4 @@ Puzzle and test inputs are not included as requested in the about section of the
 
 I highly encourage you to try out the problems for yourself before viewing my or anyone else's solutions.
 
-To get started, run `create_template_files.py` in your chosen directory. This will create 25 folders, one for each day, each with a template Python and input files, as well as a gitignore file to prevent you from inadvertantly including your puzzle inputs in an online repository.
+To get started, run `create_template_files.py` in your chosen directory. This will create 25 folders, one for each day, each with template Python and input files, as well as a gitignore file to prevent you from inadvertantly including your puzzle inputs in an online repository.
