@@ -15,8 +15,10 @@ try:
         with open(f"{dir_name}/Test input.txt", "x"): pass
         with open(f"{dir_name}/Puzzle input.txt", "x"): pass
         with open(f"{dir_name}/solution.py", "x") as script:
-            script.write("""if __name__ == "__main__":
-    with open("Test input.txt", "r") as data:
+            script.write("""from pathlib import Path
+
+if __name__ == "__main__":
+    with open(Path(__file__).resolve().parent / "Test input.txt", "r") as data:
         pass  # Parse the data here
     # Solve the problem here
 """)
