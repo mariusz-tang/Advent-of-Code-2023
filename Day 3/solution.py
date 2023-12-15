@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 class Schematic:
     def __init__(self, raw_text: str) -> None:
         self._grid = [[char for char in row] for row in raw_text.splitlines()]
@@ -42,14 +45,14 @@ class Schematic:
         return self._grid[y][x]
 
     def _handle_asterisk(self, x, y, number):
-        key = f"{x} {y}" 
+        key = f"{x} {y}"
         if key not in self._asterisk_values:
             self._asterisk_values[key] = []
         self._asterisk_values[key].append(number)
 
     def get_sum_of_numbers(self):
         return sum([num.number for num in self._numbers])
-    
+
     def get_gear_sum(self):
         gears = filter(lambda values: len(values) == 2, self._asterisk_values.values())
         return sum([gear[0] * gear[1] for gear in gears])
@@ -63,7 +66,7 @@ class Schematic:
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         schematic = Schematic(data.read())
     print(f"Part 1: The total comes out to {schematic.get_sum_of_numbers()}!")
     print(f"Part 2: The total comes out to {schematic.get_gear_sum()}!")

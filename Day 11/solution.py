@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 def get_transformed_galaxies(initial_image, expansion_rate):
     galaxies = []
     rows = len(initial_image)
@@ -37,7 +40,7 @@ def get_manhattan_distance(lhs, rhs):
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         image = data.read().splitlines()
 
     galaxies = get_transformed_galaxies(image, 1)

@@ -1,3 +1,4 @@
+from pathlib import Path
 import re as regex
 
 limits = {"red": 12, "green": 13, "blue": 14}
@@ -19,7 +20,7 @@ def get_power(groups):
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         games_groups = [[match.groups() for match in regex.finditer(r"(\d+) (red|green|blue)", game)] for game in data.read().splitlines()]
     possible_games_total = sum([ix + 1 for ix, _ in filter(lambda pair : possible(pair[1]), enumerate(games_groups))])
     powers_total = sum([get_power(groups) for groups in games_groups])

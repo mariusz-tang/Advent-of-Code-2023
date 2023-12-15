@@ -1,3 +1,4 @@
+from pathlib import Path
 import re
 
 
@@ -24,7 +25,7 @@ def extrapolate(sequence: list) -> None:
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         sequences = [
             [int(m[0]) for m in re.finditer(r"-?\d+", line)]
             for line in data.read().splitlines()

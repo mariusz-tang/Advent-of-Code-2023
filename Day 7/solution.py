@@ -1,6 +1,7 @@
-import re as regex
 from enum import Enum
 from operator import attrgetter
+from pathlib import Path
+import re as regex
 
 
 class Hand:
@@ -78,7 +79,7 @@ class Hand:
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         hands = [
             Hand(match[1], match[2])
             for match in regex.finditer(r"([2-9TJQKA]{5}) (\d+)", data.read())

@@ -1,3 +1,4 @@
+from pathlib import Path
 import re
 
 
@@ -71,7 +72,7 @@ def get_total_arrangements(row: Nonorow) -> int:
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         matches = re.finditer(r"([#?.]+) ((?:\d+,)*\d+)", data.read())
 
     rows = []

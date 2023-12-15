@@ -1,4 +1,5 @@
 from numpy import array as vector
+from pathlib import Path
 
 
 class PipeGrid:
@@ -115,7 +116,7 @@ def get_path_length(grid: PipeGrid, direction, path):
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         grid = PipeGrid(data.read().splitlines())
 
     path = []

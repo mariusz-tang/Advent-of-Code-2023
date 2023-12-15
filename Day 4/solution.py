@@ -1,3 +1,4 @@
+from pathlib import Path
 import re as regex
 
 
@@ -26,7 +27,7 @@ def part_two(cards):
     card_matches = []
     for card in cards:
         card_matches.append(get_match_count(card))
-    
+
     copies = [1] * len(card_matches)
     for ix in range(len(card_matches)):
         current_count = copies[ix]
@@ -39,7 +40,7 @@ def part_two(cards):
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         cards = data.read().splitlines()
     print(f"Part 1: we have {part_one(cards)} points! :)")
     print(f"Part 2: we end up with {part_two(cards)} cards! :)")

@@ -1,3 +1,4 @@
+from pathlib import Path
 import re
 
 
@@ -85,7 +86,7 @@ def get_smudged_score(grid: ReflectedGrid) -> int:
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         grids = [
             ReflectedGrid(m[0].splitlines())
             for m in re.finditer(r"(?:[#.]+\n)+[#.]+", data.read())

@@ -1,3 +1,4 @@
+from pathlib import Path
 import re as regex
 
 
@@ -98,7 +99,7 @@ def get_seed_location(seed, maps):
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt") as data:
         raw_splits = regex.split(r"\n\n.+map:\n", data.read())
 
     seeds_part_one = list(

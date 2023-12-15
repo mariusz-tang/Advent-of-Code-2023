@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 def get_calibration_value(sequence: str):
     first = None
     last = None
@@ -47,7 +50,7 @@ def get_first_digit_advanced(sequence: str, reverse):
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         sequences = data.read().splitlines()
     total = 0
     total_advanced = 0

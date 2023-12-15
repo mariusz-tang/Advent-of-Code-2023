@@ -1,5 +1,6 @@
-import re as regex
 from math import lcm
+from pathlib import Path
+import re as regex
 
 # In hindsight, this should not work AT ALL if there is more than one start node
 # I must have gotten extremely lucky with my map...
@@ -19,7 +20,7 @@ def find_step_count(node_map: dict, start_nodes: list, instructions: str, goal_c
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt", "r") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt", "r") as data:
         instructions = regex.match(r"[RL]+", data.readline())[0]
         node_map = {
             m[1]: {"L": m[2], "R": m[3]}

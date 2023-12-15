@@ -1,3 +1,4 @@
+from pathlib import Path
 import re as regex
 
 
@@ -11,7 +12,7 @@ def get_possibilities_count(time, distance):
 
 
 if __name__ == "__main__":
-    with open("Puzzle input.txt") as data:
+    with open(Path(__file__).resolve().parent / "Puzzle input.txt") as data:
         times = [int(match[0]) for match in regex.finditer(r"\d+", data.readline())]
         distances = [int(match[0]) for match in regex.finditer(r"\d+", data.readline())]
     
