@@ -16,30 +16,17 @@ def main():
         for ix in range(25):
             dir_name = path / f"Day {ix + 1}"
             mkdir(dir_name)
-            with open(dir_name / "Test input.txt", "x"):
-                pass
-            with open(dir_name / "Puzzle input.txt", "x"):
-                pass
-            with open(dir_name / "solution.py", "x") as script:
-                script.write(
-                    """from pathlib import Path
-
-
-def main():
-    with open(Path(__file__).resolve().parent / "Test input.txt", "r") as data:
-        pass  # Parse the data here
-    # Solve the problem here
-
-
-if __name__ == "__main__":
-    main()
-"""
-                )
+            open(dir_name / "Test input.txt", "x").close()
+            open(dir_name / "Puzzle input.txt", "x").close()
+            with open(path / "template.py", "r") as template, open(
+                dir_name / "solution.py", "x"
+            ) as script:
+                script.write(template.read())
         with open(path / ".gitignore", "x") as gitignore:
             gitignore.write("*input.txt")
         print(f"Created 25 directories and .gitignore in {path}.")
     except OSError as e:
-        print(f"Failed to create templates:")
+        print(f"Failed to create all template files:")
         print(e)
 
     input("Press ENTER to exit.")
