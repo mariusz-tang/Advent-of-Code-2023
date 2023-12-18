@@ -14,7 +14,7 @@ def main():
 
     try:
         for ix in range(25):
-            dir_name = path / f"Day {ix + 1}"
+            dir_name = path / f"Day {ix + 1:02d}"
             mkdir(dir_name)
             open(dir_name / "Test input.txt", "x").close()
             open(dir_name / "Puzzle input.txt", "x").close()
