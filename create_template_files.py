@@ -1,3 +1,8 @@
+"""
+Creates template files for Advent of Code in the same directory as this script.
+
+Requires template.py to be in the same directory.
+"""
 from os import mkdir
 from pathlib import Path
 
@@ -7,7 +12,7 @@ def main():
     input_ = input(f"Create Advent of Code templates in {path}? (YES to confirm) ")
     if input_ != "YES":
         print(
-            "Cancelled. Place this script from your chosen directory before running to change the suggested directory."
+            "Cancelled. Place this script in your chosen directory before running to change the suggested directory."
         )
         input("Press ENTER to exit.")
         exit()
@@ -22,9 +27,7 @@ def main():
                 dir_name / "solution.py", "x"
             ) as script:
                 script.write(template.read())
-        with open(path / ".gitignore", "x") as gitignore:
-            gitignore.write("*input.txt")
-        print(f"Created 25 directories and .gitignore in {path}.")
+        print(f"Created 25 directories in {path}.")
     except OSError as e:
         print(f"Failed to create all template files:")
         print(e)
